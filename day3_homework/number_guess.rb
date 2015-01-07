@@ -1,93 +1,33 @@
-puts "Player 1, what is your name?"
-name1 = gets.chomp
-puts "Player 1 is #{name1}!"
-puts "Player 2, what is your name?"
-name2 = gets.chomp
-puts "Player 2 is #{name2}!"
-
-puts "Let's play Tic Tac Toe."
+random_num = rand(1..100)
+counter = 0
+@game_on = true
 
 
-# Draw a board
-# Asks for user to pick a location
-# Draws an X in said location
-# Asks next user to pick a location
-# Draws an O in said location
-# Repeat until 3 in a row/diagonal
+puts "Let's play Guess the Number!  You have 5 attempts."
+puts "Please pick a number beteen 1 and 100."
 
-board = [
-	[0,0,0],
-	[0,0,0],
-	[0,0,0]
-]
+def num_game random_num
 
-def draw_board board, playername
-	# board[0][0] == 0 ? "" : "X"
-	puts playername
-	puts "#{draw_space(board[0][0])}|#{draw_space(board[0][1])}|#{draw_space(board[0][2])}"
-	puts '-----'
-	puts "#{draw_space(board[1][0])}|#{draw_space(board[1][1])}|#{draw_space(board[1][2])}"
-	puts '-----'
-	puts "#{draw_space(board[2][0])}|#{draw_space(board[2][1])}|#{draw_space(board[2][2])}"
+puts "What is your guess?"
+guess = gets.chomp.to_i
 
-end
 
-def draw_space board_space
-	if board_space == 0
-		' '
-	elsif board_space == 1
-		'X'
-	elsif board_space == 2
-		'O'
-	end
+if guess == random_num
+	puts "Congrats, you got it!"
+	@game_on = false
 
-	# return "hey Ryan!"
-	# "hey Ryan!" - you do not need the return!
-	# puts "Hey"
-	# board_space + " you're cool! "
-end
-
-def pick_location board, player
-	puts "Pick a location (1-9):"
-	location = gets.chomp.to_i
-	if location == 1
-		board[0][0] = player
-	elsif location == 2
-		board[0][1] = player
-	elsif location == 3
-		board[0][2] = player
-	elsif location == 4
-		board[1][0] = player
-	elsif location == 5
-		board[1][1] = player
-	elsif location == 6
-		board[1][2] = player
-	elsif location == 7
-		board[2][0] = player
-	elsif location == 8
-		board[2][1] = player
-	elsif location == 9
-		board[2][2] = player
-	end
-end
-
-# puts draw_space(board[0][1])
-# 10.times do
-# 	draw_board
-# end
-while true
-	player = 1
-	draw_board(board, name1)
-	pick_location(board, player)
 	
-	player = 2
-	draw_board(board, name2)
-	pick_location(board, player)
-	# parenthesis are not necessary
+elsif guess < random_num
+	puts "You are too low."
+elsif guess > random_num
+	puts "You are too high."
+end
 end
 
-# [12,3,4,5].each do |number|
-# 	puts number
-# end
+while counter < 5 && @game_on
+	num_game(random_num)
+	counter += 1 
 
 
+
+end
